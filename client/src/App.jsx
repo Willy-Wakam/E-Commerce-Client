@@ -17,10 +17,8 @@ import UnAuthPage from './pages/un-auth/UnAuthPage'
 
 function App() {
 
-  const isAuthenticated = true; // Replace with actual authentication logic
-  const user = {
-    role: 'customer', // or 'admin' based on the logged-in user
-  }; // Replace with actual user data
+  const isAuthenticated = false; // Replace with actual authentication logic
+  const user = null; // Replace with actual user data
 
   return (
     <>

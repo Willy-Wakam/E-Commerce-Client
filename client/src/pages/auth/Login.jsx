@@ -1,20 +1,43 @@
 
+import CommonForm from "@/components/common/Form";
+import { loginControls } from "@/config";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
+const initialState = {
+  email: "",
+  password: "",
+};
 function Login() {
+ const [formData, setFormData] = useState(initialState);
+
+  function handleFormSubmit(event) {
+    event.preventDefault();}
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Login Page</h1>
-      <form className="bg-white p-6 rounded shadow-md w-80">
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-2" htmlFor="email">Email</label>
-          <input type="email" id="email" className="w-full p-2 border border-gray-300 rounded" />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-2" htmlFor="password">Password</label>
-          <input type="password" id="password" className="w-full p-2 border border-gray-300 rounded" />
-        </div>
-        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Login</button>
-      </form>
+    <div className="mx-auto max-w-md p-6 w-full space-y-6">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+          Login
+        </h1>
+        <p className="text-gray-600">Sign in to your account</p> <br />
+        <CommonForm
+          FormControls={loginControls}
+          buttonText={"Sign In"}
+          formData={formData}
+          setFormData={setFormData}
+          onSubmit={handleFormSubmit}
+        />
+        <p className="text-gray-600">
+          Don't have an account?{" "}
+          <Link
+            className="font-medium text-primary !hover:underline"
+            to="/auth/register"
+          >
+            Register now
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

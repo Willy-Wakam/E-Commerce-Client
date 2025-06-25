@@ -1,8 +1,11 @@
 
 import CommonForm from "@/components/common/Form";
 import { loginControls } from "@/config";
+import { loginUser } from "@/store/auth-slice";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const initialState = {
   email: "",
@@ -11,8 +14,19 @@ const initialState = {
 function Login() {
  const [formData, setFormData] = useState(initialState);
 
+ const dispatch = useDispatch();
+
   function handleFormSubmit(event) {
-    event.preventDefault();}
+    event.preventDefault();
+    dispatch(loginUser(formData)).then((response) => {
+      console.log("Login response:", response);
+      if (response?.meta?.requestStatus === "fulfilled" && response?.payload?.success) {
+        toast.success("Login successful!");
+      } else {  
+        toast.error(response?.payload?.message || "Login failed. Please try again.");
+      } 
+    });
+  }
 
   return (
     <div className="mx-auto max-w-md p-6 w-full space-y-6">

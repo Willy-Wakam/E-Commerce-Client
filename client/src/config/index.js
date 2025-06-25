@@ -31,16 +31,6 @@ export const registerControls = [
             minLength: 6
         }
     },
-    {
-        name: 'confirmPassword',
-        type: 'password',
-        label: 'Confirm Password',
-        placeholder: 'Re-enter your password',
-        required: true,
-        validation: {
-            matchesField: 'password'
-        }
-    }
 ]
 
 export const loginControls = [

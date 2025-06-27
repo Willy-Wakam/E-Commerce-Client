@@ -14,10 +14,19 @@ import ShoppingCardCheckout from "./pages/shopping-view/CheckOut";
 import ShoppingProductsList from "./pages/shopping-view/ProductsList";
 import CheckAuth from "./components/common/Check-Auth";
 import UnAuthPage from "./pages/un-auth/UnAuthPage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { checkProfile } from "./store/auth-slice";
+
 
 function App() {
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const { isAuthenticated, user, isLoading } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Check if the user is authenticated on initial load
+    dispatch(checkProfile());
+  }, [dispatch]);
 
   return (
     <>
@@ -26,7 +35,7 @@ function App() {
           <Route
             path="/auth"
             element={
-              <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+              <CheckAuth isAuthenticated={isAuthenticated} user={user} isLoading={isLoading}>
                 <AuthLayout />
               </CheckAuth>
             }
@@ -37,7 +46,7 @@ function App() {
           <Route
             path="/admin"
             element={
-              <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+              <CheckAuth isAuthenticated={isAuthenticated} user={user} isLoading={isLoading}>
                 <AdminViewLayout />
               </CheckAuth>
             }
@@ -50,7 +59,7 @@ function App() {
           <Route
             path="/shop"
             element={
-              <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+              <CheckAuth isAuthenticated={isAuthenticated} user={user} isLoading={isLoading}>
                 <ShoppingLayout />
               </CheckAuth>
             }

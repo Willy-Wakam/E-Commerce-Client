@@ -30,7 +30,7 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col overflow-hidden bg-white">
+      <div className="flex flex-col overflow-hidden bg-white w-[100%]">
         <Routes>
           <Route
             path="/auth"

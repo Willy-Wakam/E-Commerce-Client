@@ -51,7 +51,7 @@ function AdminSideBar({ open, setOpen }) {
             className="flex cursor-pointer flex-col h-full bg-gray-900 text-white"
           >
             <SheetHeader className="border-b">
-              <SheetTitle className="flex gap-2 mt-1 text-white ">
+              <SheetTitle className="flex gap-2 mt-1 text-white">
                 <ChartNoAxesCombined className="w-7 h-7" />
                 <span className="text-xl font-semibold">Admin Panel</span>
               </SheetTitle>

@@ -19,7 +19,6 @@ function Login() {
   function handleFormSubmit(event) {
     event.preventDefault();
     dispatch(loginUser(formData)).then((response) => {
-      console.log("Login response:", response);
       if (response?.meta?.requestStatus === "fulfilled" && response?.payload?.success) {
         toast.success("Login successful!");
       } else {  

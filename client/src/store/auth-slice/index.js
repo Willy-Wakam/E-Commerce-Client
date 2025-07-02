@@ -41,7 +41,6 @@ export const checkProfile = createAsyncThunk(
           },
         }
       );
-      console.log("Profile response:", response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -56,6 +55,24 @@ export const loginUser = createAsyncThunk(
       const response = await axios.post(
         "http://localhost:4000/api/auth/login",
         userData,
+        {
+          withCredentials: true,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const logOutUser = createAsyncThunk(
+  "auth/logoutUser",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/auth/logout",
+        {},
         {
           withCredentials: true,
         }
@@ -103,6 +120,23 @@ const authSlice = createSlice({
         state.user = null;
         state.token = null;
         state.error = action.payload || "Login failed";
+      })
+      .addCase(logOutUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(logOutUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isAuthenticated = !action.payload.success;
+        state.user = null;
+        state.token = null;
+      })
+      .addCase(logOutUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isAuthenticated = action.payload?.success || false;
+        state.user = null;
+        state.token = null;
+        state.error = action.payload || "Logout failed";
       })
       .addCase(checkProfile.pending, (state) => {
         state.isLoading = true;

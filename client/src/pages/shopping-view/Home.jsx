@@ -1,6 +1,15 @@
 
+import { useEffect} from "react";
+import { useDispatch } from "react-redux";
+import { fetchAllproducts } from "@/store/admin/products";
+
 
 function ShoppingHome() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAllproducts())
+  }, [dispatch])
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-4xl font-bold mb-4">Welcome to the Shopping App</h1>

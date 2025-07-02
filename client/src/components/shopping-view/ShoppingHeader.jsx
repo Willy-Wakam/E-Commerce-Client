@@ -37,8 +37,8 @@ function HeaderRightContent() {
       </Button>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Avatar className="!bg-black justify-center items-center hover:cursor-pointer" /* onClick={() => navigate("/shop/account")} */>
-            <AvatarFallback className="!bg-black text-white font-extrabold">{user?.username[0]?.toUpperCase()}</AvatarFallback>
+          <Avatar className="!bg-gray-900 justify-center items-center hover:cursor-pointer" /* onClick={() => navigate("/shop/account")} */>
+            <AvatarFallback className="!bg-gray-900 text-white font-extrabold">{user?.username[0]?.toUpperCase()}</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent side="right" className="w-56">

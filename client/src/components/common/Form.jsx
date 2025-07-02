@@ -1,3 +1,4 @@
+import ImageUpload from "../admin-view/ImageUpload";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -9,17 +10,26 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
-
 function CommonForm({
   FormControls: formControls,
   formData,
   setFormData,
   onSubmit,
   buttonText,
+  setUploadedImageUrl,
+  imageLoadingState,
+  imageFile,
+  setImageFile,
+  setImageLoadingState,
+  isEditMode
 }) {
+    function isFormValid(){
+    return Object.keys(formData).map(key => formData[key] !== "").every(item => item)
+  }
+
   function renderInputsByComponentType(getControlItem, index) {
     let element = null;
-
+    
     const value = formData[getControlItem.name] || "";
     switch (getControlItem.componentType) {
       case "input":
@@ -28,7 +38,7 @@ function CommonForm({
             name={getControlItem.name}
             placeholder={getControlItem.placeholder}
             id={getControlItem.name + index}
-            type={getControlItem.type}
+            type={getControlItem.componentType}
             required={getControlItem.required}
             validation={getControlItem.validation}
             value={value}
@@ -40,7 +50,7 @@ function CommonForm({
             }
           />
         );
-        break;
+        return element;
       case "select":
         element = (
           <Select
@@ -53,13 +63,13 @@ function CommonForm({
             }}
           >
             <SelectTrigger className="w-full">
-              <SelectValue placeholder={getControlItem.placeholder} />
+              <SelectValue placeholder={getControlItem.label} />
             </SelectTrigger>
             <SelectContent>
               {getControlItem?.options.length > 0
-                ? getControlItem.options.map((option, optionIndex) => (
+                ? getControlItem.options.map((option) => (
                     <SelectItem
-                      key={optionIndex + option.id}
+                      key={`${getControlItem.name}-${option.value}`}
                       value={option.value}
                     >
                       {option.label}
@@ -69,7 +79,7 @@ function CommonForm({
             </SelectContent>
           </Select>
         );
-        break;
+        return element;
       case "textarea":
         element = (
           <Textarea
@@ -87,7 +97,71 @@ function CommonForm({
             }
           />
         );
-        break;
+        return element;
+      case "checkbox":
+        element = (
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id={getControlItem.name + index}
+              name={getControlItem.name}
+              checked={value}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  [getControlItem.name]: e.target.checked,
+                })
+              }
+            />
+            <Label htmlFor={getControlItem.name + index}>
+              {getControlItem.label}
+            </Label>
+          </div>
+        );
+        return element;
+      case "radio":
+        element = (
+          <div className="flex items-center space-x-2">
+            {getControlItem.options.map((option) => (
+              <div key={option.value} className="flex items-center space-x-1">
+                <input
+                  type="radio"
+                  id={`${getControlItem.name}-${option.value}`}
+                  name={getControlItem.name}
+                  value={option.value}
+                  checked={value === option.value}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      [getControlItem.name]: e.target.value,
+                    })
+                  }
+                />
+                <Label htmlFor={`${getControlItem.name}-${option.value}`}>
+                  {option.label}
+                </Label>
+              </div>
+            ))}
+          </div>
+        );
+        return element;
+      case "url":
+        element = (
+          <ImageUpload
+            file={imageFile}
+            setFile={setImageFile}
+            setUploadedImageUrl={setUploadedImageUrl}
+            getControlItem={getControlItem}
+            formData={formData}
+            setFormData={setFormData}
+            index={index}
+            value={value}
+            setImageLoadingState={setImageLoadingState}
+            imageLoadingState={imageLoadingState}
+            isEditMode={isEditMode}
+          />
+        );
+        return element;
       // Add more cases for different component types as needed
       default:
         element = (
@@ -95,7 +169,7 @@ function CommonForm({
             name={getControlItem.name}
             placeholder={getControlItem.placeholder}
             id={getControlItem.name + index}
-            type={getControlItem.type}
+            type={getControlItem.componentType}
             required={getControlItem.required}
             validation={getControlItem.validation}
             value={value}
@@ -115,14 +189,21 @@ function CommonForm({
       <div className="flex flex-col gap-3">
         {formControls.map((control, index) => (
           <div key={index} className="grid w-full gap-1.5">
-            <Label htmlFor={control.name} className="mb-1 font-semibold">
+            <Label
+              htmlFor={control.name}
+              className={
+                isEditMode && control.name === "imageUrl"
+                  ? "hidden"
+                  : `mb-1 font-semibold`
+              }
+            >
               {control.label}
             </Label>
             {renderInputsByComponentType(control, index)}
           </div>
         ))}
       </div>
-      <Button type="submit" className="m-2 w-full !bg-primary text-white ">
+      <Button type="submit" className="m-2 w-full !bg-primary text-white " disabled={!isFormValid()}>
         {buttonText || "Submit"}
       </Button>
     </form>

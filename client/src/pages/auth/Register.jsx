@@ -1,7 +1,11 @@
 import CommonForm from "@/components/common/Form";
 import { registerControls } from "@/config";
+import { registerUser } from "@/store/auth-slice";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialState = {
   username: "",
@@ -9,10 +13,27 @@ const initialState = {
   password: "",
 };
 function Register() {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState(initialState);
 
+  const navigate = useNavigate();
+  // Handle form submission
   function handleFormSubmit(event) {
-    event.preventDefault();}
+    event.preventDefault();
+    dispatch(registerUser(formData)).then((response) => {
+      console.log("Registration response:", response);
+      if (response?.meta?.requestStatus === "fulfilled" && response?.payload?.success) {
+        toast.success("Registration successful! Please log in.");
+        // Registration successful, redirect to login page
+        navigate("/auth/login");
+      } else {
+        toast.error("Email or Username already exists. Please try another one.");
+        // Handle registration error
+        console.error("Registration failed:", response.payload);
+      }
+    });
+  }
 
   return (
     <div className="mx-auto max-w-md p-6 w-full space-y-6">

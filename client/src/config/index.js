@@ -179,3 +179,36 @@ export const productFormElements = [
     parse: (value) => value.split(",").map((tag) => tag.trim()),
   },
 ];
+
+export const shoppingViewHeaderMenuItems = [
+  {
+    id: "home",
+    label: "Home",
+    path: "/shop/home",
+  },
+  {
+    id: "men",
+    label: "Men",
+    path: "/shop/products",
+  },
+  {
+    id: "women",
+    label: "Women",
+    path: "/shop/products",
+  },
+  {
+    id: "kids",
+    label: "Kids",
+    path: "/shop/products",
+  },
+  {
+    id: "accessories",
+    label: "Accessories",
+    path: "/shop/products",
+  },
+  {
+    id: "footwear",
+    label: "Footwear",
+    path: "/shop/products",
+  },
+];

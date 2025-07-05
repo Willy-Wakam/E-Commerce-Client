@@ -36,9 +36,9 @@ function App() {
     <>
       <div className="flex flex-col overflow-hidden bg-white w-[100%]">
         <Routes>
-          <Route path="/" element={<Navigate to="https://e-commerce-app-oa1v.onrender.com/auth/login" />} />
+          <Route path="https://e-commerce-app-oa1v.onrender.com/" element={<Navigate to="https://e-commerce-app-oa1v.onrender.com/auth/login" />} />
           <Route
-            path="/auth"
+            path="https://e-commerce-app-oa1v.onrender.com/auth"
             element={
               <CheckAuth isAuthenticated={isAuthenticated} user={user} isLoading={isLoading}>
                 <AuthLayout />
@@ -49,7 +49,7 @@ function App() {
             <Route path="register" element={<Register />} />
           </Route>
           <Route
-            path="/admin"
+            path="https://e-commerce-app-oa1v.onrender.com/admin"
             element={
               <CheckAuth isAuthenticated={isAuthenticated} user={user} isLoading={isLoading}>
                 <AdminViewLayout />
@@ -62,7 +62,7 @@ function App() {
             <Route path="orders" element={<AdminOrders />} />
           </Route>
           <Route
-            path="/shop"
+            path="https://e-commerce-app-oa1v.onrender.com/shop"
             element={
               <CheckAuth isAuthenticated={isAuthenticated} user={user} isLoading={isLoading}>
                 <ShoppingLayout />
@@ -75,10 +75,10 @@ function App() {
             <Route path="products" element={<ShoppingProductsList />} />
           </Route>
           <Route
-            path="*"
+            path="https://e-commerce-app-oa1v.onrender.com/*"
             element={<h1 className="text-3xl text-center">Page Not Found</h1>}
           />
-          <Route path="/unauth-page" element={<UnAuthPage />} />
+          <Route path="https://e-commerce-app-oa1v.onrender.com/unauth-page" element={<UnAuthPage />} />
         </Routes>
       </div>
     </>

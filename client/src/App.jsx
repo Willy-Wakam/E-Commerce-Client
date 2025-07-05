@@ -17,7 +17,11 @@ import UnAuthPage from "./pages/un-auth/UnAuthPage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { checkProfile } from "./store/auth-slice";
+import axios from "axios";
 
+
+axios.defaults.baseURL = "https://e-commerce-app-oa1v.onrender.com";
+axios.defaults.withCredentials = true;
 
 function App() {
   const { isAuthenticated, user, isLoading } = useSelector((state) => state.auth);

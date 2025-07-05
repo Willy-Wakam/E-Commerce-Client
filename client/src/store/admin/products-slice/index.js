@@ -39,7 +39,7 @@ export const fetchAllproducts = createAsyncThunk(
     try {
       const response = await axios.get(
         "http://localhost:4000/api/admin/products/fetch",
-        
+
         {
           headers: {
             "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export const fetchAllproducts = createAsyncThunk(
 
 export const editProduct = createAsyncThunk(
   "admin/products/editProduct",
-  async ({id, productData}, { rejectWithValue }) => {
+  async ({ id, productData }, { rejectWithValue }) => {
     try {
       const response = await axios.put(
         "http://localhost:4000/api/admin/products/edit/" + id,
@@ -68,7 +68,7 @@ export const editProduct = createAsyncThunk(
         {
           headers: {
             "Content-Type": "application/json",
-          }
+          },
         }
       );
 
@@ -146,7 +146,9 @@ const adminProducts = createSlice({
         state.isLoading = false;
         const updatedProduct = action.payload;
         const index = state.products.findIndex(
-          (product) => product.id === action.payload.id || product._id === updatedProduct._id
+          (product) =>
+            product.id === action.payload.id ||
+            product._id === updatedProduct._id
         );
         if (index !== -1) {
           state.products[index] = action.payload;

@@ -36,6 +36,7 @@ function App() {
     <>
       <div className="flex flex-col overflow-hidden bg-white w-[100%]">
         <Routes>
+          <Route path="/" element={<Navigate to="/auth/login" />} />
           <Route
             path="/auth"
             element={

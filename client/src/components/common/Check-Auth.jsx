@@ -19,7 +19,6 @@ function CheckAuth({ isAuthenticated, isLoading, user, children }) {
   ) {
     return <Navigate to="/auth/login" />;
   }
-  if(!isAuthenticated && location.pathname.endsWith("/")) return <Navigate to="/auth/login" />
 
   if (
     isAuthenticated &&

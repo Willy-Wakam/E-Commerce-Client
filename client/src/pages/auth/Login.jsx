@@ -2,7 +2,7 @@
 import CommonForm from "@/components/common/Form";
 import { loginControls } from "@/config";
 import { loginUser } from "@/store/auth-slice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -13,7 +13,6 @@ const initialState = {
 };
 function Login() {
  const [formData, setFormData] = useState(initialState);
- const {token} = useSelector((state) => state.auth)
 
  const dispatch = useDispatch();
 
@@ -26,8 +25,8 @@ function Login() {
         toast.error(response?.payload?.message || "Login failed. Please try again.");
       } 
     });
-    sessionStorage.setItem("token", token);
   }
+
 
   return (
     <div className="mx-auto max-w-md p-6 w-full space-y-6">

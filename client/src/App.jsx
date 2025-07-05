@@ -47,7 +47,8 @@ function App() {
                   <AuthLayout />
                 </CheckAuth>}
           >
-            <Route
+          </Route>
+                      <Route
               path="/auth"
               element={
                 <CheckAuth
@@ -102,7 +103,6 @@ function App() {
             element={<h1 className="text-3xl text-center">Page Not Found</h1>}
           /> */}
             <Route path="/unauth-page" element={<UnAuthPage />} />
-          </Route>
         </Routes>
       </div>
     </>

@@ -1,13 +1,13 @@
 import { filterOptions } from "@/config";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Label } from "../ui/label";
 import { FilterIcon } from "lucide-react";
 
 function ProductFilter({ filter, handleFilter }) {
-  const [checked, setChecked] = useState({});
+  const isChecked = (group, id) =>
+    Array.isArray(filter?.[group]) && filter[group].includes(id);
 
   const changeHandler = (group, opt) => {
-    setChecked((prev) => ({ ...prev, [opt.id]: !prev[opt.id] }));
     handleFilter(group, opt.id);
   };
   return (
@@ -27,13 +27,7 @@ function ProductFilter({ filter, handleFilter }) {
                     <input
                       type="checkbox"
                       id={opt.id}
-                      checked={
-                        (filter &&
-                          Object.keys(filter).length > 0 &&
-                          filter[option] &&
-                          filter[option].indexOf(opt.id) !== -1) ||
-                        !!checked[opt.id]
-                      }
+                      checked={isChecked(option, opt.id)}
                       onChange={() => changeHandler(option, opt)}
                     />
                     <Label className="font-medium" htmlFor={opt.name}>

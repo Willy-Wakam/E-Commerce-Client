@@ -2,16 +2,20 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-    isLoading: false,
-    products: []
-}
+  isLoading: false,
+  products: [],
+};
 
 export const fetchAllFilteredProducts = createAsyncThunk(
   "admin/products/fetchFilteredProducts",
-  async (_, { rejectWithValue }) => {
+  async ({ filterParams, sortParams }, { rejectWithValue }) => {
     try {
+      const query = new URLSearchParams({
+        ...filterParams,
+        sortBy: sortParams,
+      });
       const response = await axios.get(
-        "http://localhost:4000/api/shop/products/get",
+        `http://localhost:4000/api/shop/products/get?${query}`,
 
         {
           headers: {
@@ -32,23 +36,23 @@ export const fetchAllFilteredProducts = createAsyncThunk(
 );
 
 const shoppingProductsSlice = createSlice({
-    name: 'shoppingProducts',
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder
-        .addCase(fetchAllFilteredProducts.pending, (state) => {
-                state.isLoading = true;
-              })
-              .addCase(fetchAllFilteredProducts.fulfilled, (state, action) => {
-                state.isLoading = false;
-                state.products = action.payload.data
-              })
-              .addCase(fetchAllFilteredProducts.rejected, (state, action) => {
-                state.isLoading = false;
-                state.products = action.payload || [];
-              })
-    }
-})
+  name: "shoppingProducts",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchAllFilteredProducts.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchAllFilteredProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.products = action.payload.data;
+      })
+      .addCase(fetchAllFilteredProducts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.products = action.payload || [];
+      });
+  },
+});
 
 export const shoppingProductsReducer = shoppingProductsSlice.reducer;

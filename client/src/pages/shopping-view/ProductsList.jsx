@@ -14,19 +14,30 @@ import ProductTileShopping from "./Product-Tile";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchAllFilteredProducts } from "@/store/shop/products-slice";
+import { useSearchParams } from "react-router-dom";
 function ShoppingProductsList() {
   const { products } = useSelector((state) => state.shopProducts);
   const dispatch = useDispatch();
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  function createSearchParamsHelper(filterParams) {
+    const queryParams = [];
+    for (const [key, value] of Object.entries(filterParams)) {
+      if (Array.isArray(value) && value.length > 0) {
+        const paramValue = value.join(",");
+        queryParams.push(`${key}=${encodeURIComponent(paramValue)}`);
+      }
+    }
+    return queryParams.join("&");
+  }
 
   function handleSort(value) {
     setSort(value);
   }
 
   function handleFilter(getSectionId, getCurrentOption) {
-    console.log(getSectionId, getCurrentOption);
-
     let copyFilters = { ...filter };
     const indexOfCurrentSection =
       Object.keys(copyFilters).indexOf(getSectionId);
@@ -35,32 +46,41 @@ function ShoppingProductsList() {
         ...copyFilters,
         [getSectionId]: [getCurrentOption],
       };
-    }
-    else {
-      const indexOfCurrentOption = copyFilters[getSectionId].indexOf(getCurrentOption);
+    } else {
+      const indexOfCurrentOption =
+        copyFilters[getSectionId].indexOf(getCurrentOption);
 
-      if(indexOfCurrentOption === -1) copyFilters[getSectionId].push(getCurrentOption)
-      else copyFilters[getSectionId].splice(indexOfCurrentOption, 1)
+      if (indexOfCurrentOption === -1)
+        copyFilters[getSectionId].push(getCurrentOption);
+      else copyFilters[getSectionId].splice(indexOfCurrentOption, 1);
     }
     setFilter(copyFilters);
-    sessionStorage.setItem('filters', JSON.stringify(copyFilters));
-    
+    sessionStorage.setItem("filters", JSON.stringify(copyFilters));
   }
 
   useEffect(() => {
-    setSort('price-lowToHigh');
-    setFilter(JSON.parse(sessionStorage.getItem('filters')) || {});
-  }, [sort])
+    if (sort === null) setSort("price-lowToHigh");
+    setFilter(JSON.parse(sessionStorage.getItem("filters")) || {});
+  }, [sort]);
 
   useEffect(() => {
-    dispatch(fetchAllFilteredProducts());
-  }, [dispatch]);
+    if (filter !== null && sort !== null)
+      dispatch(
+        fetchAllFilteredProducts({ filterParams: filter, sortParams: sort })
+      );
+  }, [dispatch, sort, filter]);
 
-  
-    console.log("Fliters: ", filter);
+  useEffect(() => {
+    if (filter && Object.keys(filter).length > 0) {
+      const createQueryString = createSearchParamsHelper(filter);
+      setSearchParams(new URLSearchParams(createQueryString));
+    }
+  }, [filter]);
+
+  console.log("Fliters: ", filter, "SearchParams", searchParams);
   return (
     <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-6 p-4 md:p-6">
-      <ProductFilter filter={filter}  handleFilter={handleFilter} />
+      <ProductFilter filter={filter} handleFilter={handleFilter} />
       <div className="bg-background w-full rounded-lg shadow-sm">
         <div className="p-4 border-b flex items-center justify-between">
           <h2 className="text-lg font-extrabold">All Products</h2>

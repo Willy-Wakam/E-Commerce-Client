@@ -14,7 +14,7 @@ export const registerUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/auth/register",
+        "https://e-commerce-api-xhj9.onrender.com/api/auth/register",
         userData,
         {
           withCredentials: true,
@@ -32,7 +32,7 @@ export const checkProfile = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/auth/profile",
+        "https://e-commerce-api-xhj9.onrender.com/api/auth/profile",
         {
           withCredentials: true,
           headers: {
@@ -53,7 +53,7 @@ export const loginUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/auth/login",
+        "https://e-commerce-api-xhj9.onrender.com/api/auth/login",
         userData,
         {
           withCredentials: true,
@@ -71,7 +71,7 @@ export const logOutUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/auth/logout",
+        "https://e-commerce-api-xhj9.onrender.com/api/auth/logout",
         {},
         {
           withCredentials: true,

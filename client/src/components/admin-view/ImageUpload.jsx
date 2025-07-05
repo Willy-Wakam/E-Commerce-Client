@@ -22,7 +22,7 @@ function ImageUpload({
     formData.append("my_file", file);
 
     const response = await axios.post(
-      "http://localhost:4000/api/admin/products/upload-image",
+      "https://e-commerce-api-xhj9.onrender.com/api/admin/products/upload-image",
       formData
     );
     console.log("Response from Cloudinary:", response.data);

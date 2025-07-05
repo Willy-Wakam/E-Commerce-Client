@@ -15,7 +15,7 @@ export const fetchAllFilteredProducts = createAsyncThunk(
         sortBy: sortParams,
       });
       const response = await axios.get(
-        `http://localhost:4000/api/shop/products/get?${query}`,
+        `https://e-commerce-api-xhj9.onrender.com/api/shop/products/get?${query}`,
 
         {
           headers: {

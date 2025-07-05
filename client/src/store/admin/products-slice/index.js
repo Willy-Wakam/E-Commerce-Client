@@ -12,7 +12,7 @@ export const addNewProduct = createAsyncThunk(
   async (productData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/admin/products/add",
+        "https://e-commerce-api-xhj9.onrender.com/api/admin/products/add",
         productData,
         {
           headers: {
@@ -38,8 +38,8 @@ export const fetchAllproducts = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/admin/products/fetch",
-        
+        "https://e-commerce-api-xhj9.onrender.com/api/admin/products/fetch",
+
         {
           headers: {
             "Content-Type": "application/json",
@@ -60,15 +60,15 @@ export const fetchAllproducts = createAsyncThunk(
 
 export const editProduct = createAsyncThunk(
   "admin/products/editProduct",
-  async ({id, productData}, { rejectWithValue }) => {
+  async ({ id, productData }, { rejectWithValue }) => {
     try {
       const response = await axios.put(
-        "http://localhost:4000/api/admin/products/edit/" + id,
+        "https://e-commerce-api-xhj9.onrender.com/api/admin/products/edit/" + id,
         productData,
         {
           headers: {
             "Content-Type": "application/json",
-          }
+          },
         }
       );
 
@@ -88,7 +88,7 @@ export const deleteProduct = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        "http://localhost:4000/api/admin/products/delete/" + id,
+        "https://e-commerce-api-xhj9.onrender.com/api/admin/products/delete/" + id,
         {
           headers: {
             "Content-Type": "application/json",
@@ -146,7 +146,9 @@ const adminProducts = createSlice({
         state.isLoading = false;
         const updatedProduct = action.payload;
         const index = state.products.findIndex(
-          (product) => product.id === action.payload.id || product._id === updatedProduct._id
+          (product) =>
+            product.id === action.payload.id ||
+            product._id === updatedProduct._id
         );
         if (index !== -1) {
           state.products[index] = action.payload;

@@ -13,7 +13,7 @@ import {
   deleteProduct,
   editProduct,
   fetchAllproducts,
-} from "@/store/admin/products";
+} from "@/store/admin/products-slice";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AdminProductTile from "./Product-Tile";

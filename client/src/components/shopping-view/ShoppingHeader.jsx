@@ -72,7 +72,7 @@ function HeaderRightContent() {
               dispatch(logOutUser()).then(() => {
                 navigate("/auth/login");
                 toast.success("Logout successful");
-                sessionStorage.clear();
+                sessionStorage.setItem("filters", {});
               })
             }
           >

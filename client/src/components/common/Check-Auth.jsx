@@ -15,7 +15,7 @@ function CheckAuth({ isAuthenticated, isLoading, user, children }) {
     !(
       location.pathname.includes("/login") ||
       location.pathname.includes("/register")
-    )
+    ) 
   ) {
     return <Navigate to="/auth/login" />;
   }

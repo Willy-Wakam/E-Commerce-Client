@@ -43,20 +43,6 @@ function CheckAuth({ isAuthenticated, isLoading, user, children }) {
   ) {
     return <Navigate to="/unauth-page" replace/>;
   }
-
-  if (
-    isAuthenticated &&
-    user?.role === "admin"
-  ) {
-    return <Navigate to="/admin/dashboard" replace/>;
-  }
-
-  if (
-    isAuthenticated &&
-    user?.role !== "admin"
-  ) {
-    return <Navigate to="/shop/home" replace/>;
-  }
   
 
   return children;

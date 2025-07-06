@@ -5,7 +5,14 @@ import { Button } from "../ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { shoppingViewHeaderMenuItems } from "@/config";
 import { Avatar, AvatarFallback } from "../ui/avatar";
-import { DropdownMenuContent, DropdownMenuLabel, DropdownMenu, DropdownMenuTrigger, DropdownMenuSeparator, DropdownMenuItem } from "../ui/dropdown-menu";
+import {
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+  DropdownMenuItem,
+} from "../ui/dropdown-menu";
 import { logOutUser } from "@/store/auth-slice";
 import { toast } from "react-toastify";
 
@@ -27,28 +34,48 @@ function MenuItems() {
 
 function HeaderRightContent() {
   const dispatch = useDispatch();
-  const {user} = useSelector(state => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   return (
     <div className="flex lg:items-center lg:flex-row flex-col gap-4  ml-[2rem]">
-      <Button variant="oultine" size="icon" onClick={() => navigate("/shop/checkout")}>
+      <Button
+        variant="oultine"
+        size="icon"
+        onClick={() => navigate("/shop/checkout")}
+      >
         <ShoppingCart className="h-6 w-6" />
         <span className="sr-only">User cart</span>
       </Button>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Avatar className="!bg-gray-900 justify-center items-center hover:cursor-pointer" /* onClick={() => navigate("/shop/account")} */>
-            <AvatarFallback className="!bg-gray-900 text-white font-extrabold">{user?.username[0]?.toUpperCase()}</AvatarFallback>
+          <Avatar
+            className="!bg-gray-900 justify-center items-center hover:cursor-pointer" /* onClick={() => navigate("/shop/account")} */
+          >
+            <AvatarFallback className="!bg-gray-900 text-white font-extrabold">
+              {user?.username[0]?.toUpperCase()}
+            </AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent side="right" className="w-56">
           <DropdownMenuLabel> Logged in as {user?.username}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="cursor-pointer" onClick={() => navigate("/shop/account")}>
+          <DropdownMenuItem
+            className="cursor-pointer"
+            onClick={() => navigate("/shop/account")}
+          >
             <UserCog className="mr-2 h-4 w-4" />
             Account
           </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer" onClick={() => dispatch(logOutUser()).then(() => {navigate("/auth/login"); toast.success("Logout successful")})}>
+          <DropdownMenuItem
+            className="cursor-pointer"
+            onClick={() =>
+              dispatch(logOutUser()).then(() => {
+                navigate("/auth/login");
+                toast.success("Logout successful");
+                sessionStorage.clear();
+              })
+            }
+          >
             <LogOut className="mr-2 h-4 w-4" />
             Logout
           </DropdownMenuItem>
@@ -80,7 +107,10 @@ function ShoppingHeader() {
         <div className="hidden lg:block">
           <MenuItems />
         </div>
-        <div className="hidden lg:block"> <HeaderRightContent /></div>
+        <div className="hidden lg:block">
+          {" "}
+          <HeaderRightContent />
+        </div>
       </div>
     </header>
   );

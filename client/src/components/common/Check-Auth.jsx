@@ -53,7 +53,7 @@ function CheckAuth({ isAuthenticated, isLoading, user, children }) {
 
   if (
     isAuthenticated &&
-    user?.role !== "admin" &&
+    user?.role !== "admin"
   ) {
     return <Navigate to="/shop/home" />;
   }

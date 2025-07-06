@@ -44,6 +44,21 @@ function CheckAuth({ isAuthenticated, isLoading, user, children }) {
     return <Navigate to="/unauth-page" />;
   }
 
+  if (
+    isAuthenticated &&
+    user?.role === "admin"
+  ) {
+    return <Navigate to="/admin/dashboard" />;
+  }
+
+  if (
+    isAuthenticated &&
+    user?.role !== "admin" &&
+  ) {
+    return <Navigate to="/shop/home" />;
+  }
+  
+
   return children;
 }
 

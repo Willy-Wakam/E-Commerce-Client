@@ -4,6 +4,7 @@ import axios from "axios";
 const initialState = {
   isLoading: false,
   products: [],
+  product: null
 };
 
 export const fetchAllFilteredProducts = createAsyncThunk(
@@ -16,6 +17,31 @@ export const fetchAllFilteredProducts = createAsyncThunk(
       });
       const response = await axios.get(
         `https://e-commerce-api-xhj9.onrender.com/api/shop/products/get?${query}`,
+
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.data || !response.data.success) {
+        throw new Error("Failed to add product");
+      }
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchProductDetails = createAsyncThunk(
+  "admin/products/fetchProductDetails",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `https://e-commerce-api-xhj9.onrender.com/api/shop/products/get/${id}`,
 
         {
           headers: {
@@ -51,6 +77,16 @@ const shoppingProductsSlice = createSlice({
       .addCase(fetchAllFilteredProducts.rejected, (state, action) => {
         state.isLoading = false;
         state.products = action.payload || [];
+      }).addCase(fetchProductDetails.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchProductDetails.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.product = action.payload.data;
+      })
+      .addCase(fetchProductDetails.rejected, (state, action) => {
+        state.isLoading = false;
+        state.product = action.payload || null;
       });
   },
 });

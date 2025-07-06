@@ -2,7 +2,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
-function ProductTileShopping({ product }) {
+function ProductTileShopping({ product, handleAddProduct }) {
+
+
   return (
     <Card className="w-full max-w-sm mx-auto !p-0">
       <div>
@@ -44,7 +46,7 @@ function ProductTileShopping({ product }) {
           </div>
         </CardContent>
         <CardFooter className="mb-2">
-            <Button className="w-full !bg-gray-900 hover:font-semibold">Add to cart</Button>
+            <Button className="w-full !bg-gray-900 hover:font-semibold" onClick={() => handleAddProduct(product._id)}>Add to cart</Button>
         </CardFooter>
       </div>
     </Card>

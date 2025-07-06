@@ -13,14 +13,20 @@ import { useSelector } from "react-redux";
 import ProductTileShopping from "./Product-Tile";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchAllFilteredProducts } from "@/store/shop/products-slice";
+import {
+  fetchAllFilteredProducts,
+  fetchProductDetails,
+} from "@/store/shop/products-slice";
 import { useSearchParams } from "react-router-dom";
+import ProductDetails from "./ProductDetails";
 function ShoppingProductsList() {
-  const { products } = useSelector((state) => state.shopProducts);
+  const { products, product } = useSelector((state) => state.shopProducts);
   const dispatch = useDispatch();
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [open, setOpen] = useState(false);
+  const [numberOfProduct, setNumberOfProduct] = useState(1);
 
   function createSearchParamsHelper(filterParams) {
     const queryParams = [];
@@ -35,6 +41,18 @@ function ShoppingProductsList() {
 
   function handleSort(value) {
     setSort(value);
+  }
+
+  function handleNumberOfProduct(button) {
+    if (button === "Minus") setNumberOfProduct(numberOfProduct - 1);
+    else setNumberOfProduct(numberOfProduct + 1);
+  }
+
+  function handleAddProduct(id) {
+    dispatch(fetchProductDetails(id)).then((data) =>
+      console.log(data.payload.data)
+    );
+    setOpen(true);
   }
 
   function handleFilter(getSectionId, getCurrentOption) {
@@ -117,10 +135,21 @@ function ShoppingProductsList() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
           {products?.map((product) => (
-            <ProductTileShopping key={product._id} product={product} />
+            <ProductTileShopping
+              handleAddProduct={handleAddProduct}
+              key={product._id}
+              product={product}
+            />
           ))}
         </div>
       </div>
+      <ProductDetails
+        numberOfProduct={numberOfProduct}
+        open={open}
+        setOpen={setOpen}
+        product={product}
+        handleNumberOfProduct={handleNumberOfProduct}
+      />
     </div>
   );
 }

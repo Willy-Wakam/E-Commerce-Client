@@ -134,7 +134,7 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-client/src/components/admin-view/ImageUpload.jsx
-client/src/store/admin/products-slice/index.js
-client/src/store/auth-slice/index.js
 client/src/store/shop/products-slice/index.js
+client/src/store/auth-slice/index.js
+client/src/store/admin/products-slice/index.js
+client/src/components/admin-view/ImageUpload.jsx

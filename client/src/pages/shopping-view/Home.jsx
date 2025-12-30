@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+
 function ShoppingHome() {
   return (
     <div className="flex flex-col items-center justify-center h-screen">

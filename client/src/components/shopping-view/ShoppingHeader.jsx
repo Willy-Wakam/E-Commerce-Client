@@ -39,7 +39,7 @@ function HeaderRightContent() {
   return (
     <div className="flex lg:items-center lg:flex-row flex-col gap-4  ml-[2rem]">
       <Button
-        variant="oultine"
+        variant="outline"
         size="icon"
         onClick={() => navigate("/shop/checkout")}
       >

@@ -5,9 +5,7 @@ function ShoppingHome() {
       <p className="text-lg mb-8">
         Explore our products and enjoy your shopping experience!
       </p>
-      <button className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-        Start Shopping
-      </button>
+      <Button onClick={() => navigate("/shop/products")}>Start Shopping</Button>
     </div>
   );
 }

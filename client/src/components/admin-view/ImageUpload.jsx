@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { Button } from "../ui/button.jsx";
+import { Input } from "../ui/input.jsx";
 import { FileIcon, XIcon } from "lucide-react";
 import axios from "axios";
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "../ui/skeleton.jsx";
 
 function ImageUpload({
   getControlItem,

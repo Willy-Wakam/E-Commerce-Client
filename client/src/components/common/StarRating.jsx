@@ -1,5 +1,5 @@
 import { StarIcon } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "../ui/button.jsx";
 
 function StarRatingComponent({ rating, handleRatingChange }) {
     console.log(rating, "rating");

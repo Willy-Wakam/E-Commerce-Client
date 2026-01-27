@@ -1,5 +1,5 @@
-import CommonForm from "@/components/common/Form";
-import { Button } from "@/components/ui/button";
+import CommonForm from "@/components/common/Form.jsx";
+import { Button } from "@/components/ui/button.jsx";
 import { toast } from "react-toastify";
 import {
   Sheet,

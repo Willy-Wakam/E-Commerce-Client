@@ -1,7 +1,7 @@
 import { AlignJustify, LogOut } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "../ui/button.jsx";
 import { useDispatch } from "react-redux";
-import { logOutUser } from "@/store/auth-slice";
+import { logOutUser } from "@/store/auth-slice/index.js";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 

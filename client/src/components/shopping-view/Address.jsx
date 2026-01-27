@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CommonForm from "../common/Form.jsx";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { addressFormControls } from "@/config";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card.jsx";
+import { addressFormControls } from "@/config/index.js";
 import { useDispatch, useSelector } from "react-redux";
 import {
     addNewAddress,

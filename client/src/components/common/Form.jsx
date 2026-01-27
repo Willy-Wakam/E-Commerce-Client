@@ -1,7 +1,7 @@
-import ImageUpload from "../admin-view/ImageUpload";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+import ImageUpload from "../admin-view/ImageUpload.jsx";
+import { Button } from "../ui/button.jsx";
+import { Input } from "../ui/input.jsx";
+import { Label } from "../ui/label.jsx";
 import {
   Select,
   SelectContent,

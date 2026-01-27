@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../ui/button.jsx";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Dialog } from "../ui/dialog";
+import { Dialog } from "../ui/dialog.jsx";
 import {
     Table,
     TableBody,
@@ -9,15 +9,15 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "../ui/table";
-import ShoppingOrderDetailsView from "./orderDetails";
+} from "../ui/table.jsx";
+import ShoppingOrderDetailsView from "./OrderDetails.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import {
     getAllOrdersByUserId,
     getOrderDetails,
     resetOrderDetails,
-} from "@/store/shop/order-slice";
-import { Badge } from "../ui/badge";
+} from "@/store/shop/order-slice/index.js";
+import { Badge } from "../ui/badge.jsx";
 
 function ShoppingOrders() {
     const [openDetailsDialog, setOpenDetailsDialog] = useState(false);

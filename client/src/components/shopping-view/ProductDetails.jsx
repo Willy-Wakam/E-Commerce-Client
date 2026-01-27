@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback } from "../ui/avatar";
-import { Button } from "../ui/button";
+import { Avatar, AvatarFallback } from "../ui/avatar.jsx";
+import { Button } from "../ui/button.jsx";
 import { Dialog, DialogContent } from "../ui/dialog.jsx";
 import { Separator } from "../ui/separator.jsx";
 import { Input } from "../ui/input";
@@ -8,7 +8,7 @@ import { addToCart, fetchCartItems } from "@/store/shop/cart-slice/index.js";
 import { Label } from "../ui/label";
 import StarRatingComponent from "../common/StarRating.jsx";
 import { useEffect, useState } from "react";
-import { addReview, getReviews } from "@/store/shop/review-slice";
+import { addReview, getReviews } from "@/store/shop/review-slice/index.js";
 import {toast} from "react-toastify";
 
 function ProductDetailsDialog({ open, setOpen, productDetails }) {

@@ -1,6 +1,6 @@
-import { filterOptions } from "@/config";
+import { filterOptions } from "@/config/index.js";
 import { Fragment } from "react";
-import { Label } from "../ui/label";
+import { Label } from "../ui/label.jsx";
 import { FilterIcon } from "lucide-react";
 
 function ProductFilter({ filter, handleFilter }) {

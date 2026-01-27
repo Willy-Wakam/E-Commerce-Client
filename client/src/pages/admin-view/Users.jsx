@@ -3,11 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "@/store/admin/users";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card.jsx";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table.jsx";
-import {Badge} from "@/components/ui/badge.jsx";
 import {Dialog} from "@/components/ui/dialog.jsx";
-import {resetOrderDetails} from "@/store/admin/order-sclice/index.js";
 import {Button} from "@/components/ui/button.jsx";
-import AdminOrderDetailsView from "@/components/admin-view/OrderDetails.jsx"; // <-- thunk/action, not reducer
 
 function AdminUsers() {
     const dispatch = useDispatch();

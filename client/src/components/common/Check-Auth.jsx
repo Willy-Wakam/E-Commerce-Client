@@ -1,5 +1,5 @@
 import { useLocation, Navigate } from "react-router-dom";
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "../ui/skeleton.jsx";
 
 function CheckAuth({ isAuthenticated, isLoading, user, children }) {
   const location = useLocation();

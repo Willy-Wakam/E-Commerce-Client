@@ -9,7 +9,7 @@ import {
     editaAddress,
     fetchAllAddresses,
 } from "@/store/shop/address-slice";
-import AddressCard from "./addressCard";
+import AddressCard from "./AddressCard.jsx";
 import {toast} from "react-toastify";
 
 const initialAddressFormData = {

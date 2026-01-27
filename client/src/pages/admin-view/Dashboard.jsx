@@ -1,4 +1,4 @@
-import ProductImageUpload from "@/components/admin-view/imageUpload";
+import ProductImageUpload from "@/components/admin-view/ImageUpload.jsx";
 import { Button } from "@/components/ui/button";
 import { addFeatureImage, getFeatureImages } from "@/store/common-slice";
 import { useEffect, useState } from "react";

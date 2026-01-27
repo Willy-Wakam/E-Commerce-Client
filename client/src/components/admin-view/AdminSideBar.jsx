@@ -11,12 +11,12 @@ import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 
 const adminSideBarMenuItems = [
-  {
+  /*{
     name: "Dashboard",
     icon: <LayoutDashboard />,
     label: "Admin Dashboard",
     path: "/admin/dashboard",
-  },
+  },*/
   {
     name: "Products",
     icon: <Box />,
@@ -39,6 +39,7 @@ const adminSideBarMenuItems = [
     name: "Users",
     icon: <User />,
     label: "Manage Users",
+    path: "/admin/users",
   },
 ];
 function AdminSideBar({ open, setOpen }) {

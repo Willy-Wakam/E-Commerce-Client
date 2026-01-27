@@ -7,12 +7,15 @@ const initialState = {
   error: null,
 };
 
+const baseURL = import.meta.env.DEV? import.meta.env.VITE_API_BASE_URL_DEV : import.meta.env.VITE_API_BASE_URL;
+
+
 export const addNewProduct = createAsyncThunk(
   "admin/products/addNewProduct",
   async (productData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://e-commerce-api-xhj9.onrender.com/api/admin/products/add",
+        `${baseURL}/api/admin/products/add`,
         productData,
         {
           headers: {
@@ -38,7 +41,7 @@ export const fetchAllproducts = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        "https://e-commerce-api-xhj9.onrender.com/api/admin/products/fetch",
+        `${baseURL}/api/admin/products/fetch`,
 
         {
           headers: {
@@ -63,7 +66,7 @@ export const editProduct = createAsyncThunk(
   async ({ id, productData }, { rejectWithValue }) => {
     try {
       const response = await axios.put(
-        "https://e-commerce-api-xhj9.onrender.com/api/admin/products/edit/" + id,
+        `${baseURL}/api/admin/products/edit/${id}`,
         productData,
         {
           headers: {
@@ -88,7 +91,7 @@ export const deleteProduct = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        "https://e-commerce-api-xhj9.onrender.com/api/admin/products/delete/" + id,
+        `${baseURL}/admin/products/delete/${id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -177,5 +180,6 @@ const adminProducts = createSlice({
       });
   },
 });
+
 
 export const adminProductReducer = adminProducts.reducer;

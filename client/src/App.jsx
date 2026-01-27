@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { checkProfile } from "./store/auth-slice";
 import axios from "axios";
+import AdminUsers from "@/pages/admin-view/Users.jsx";
 
 axios.defaults.baseURL = "https://e-commerce-app-oa1v.onrender.com";
 axios.defaults.withCredentials = true;
@@ -65,10 +66,11 @@ function App() {
               </CheckAuth>
             }
           >
-            <Route path="dashboard" element={<AdminDashboard />} />
-            <Route path="products" element={<AdminProducts />} />
+            {/*<Route path="dashboard" element={<AdminDashboard />} />*/}
+              <Route path="products" element={<AdminProducts />} />
             <Route path="features" element={<AdminFeatures />} />
             <Route path="orders" element={<AdminOrders />} />
+              <Route path="users" element={<AdminUsers />} />
           </Route>
           <Route
             path="/shop"

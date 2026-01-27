@@ -9,15 +9,21 @@ const initialState = {
   error: null,
 };
 
+const baseURL = import.meta.env.DEV? import.meta.env.VITE_API_BASE_URL_DEV : import.meta.env.VITE_API_BASE_URL;
+
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (userData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://e-commerce-api-xhj9.onrender.com/api/auth/register",
+        `${baseURL}/api/auth/register`,
         userData,
         {
           withCredentials: true,
+          headers: {
+            "Cache-Control":
+                "no-cache no-store, must-revalidate proxy-revalidate",
+          },
         }
       );
       return response.data;
@@ -32,7 +38,7 @@ export const checkProfile = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        "https://e-commerce-api-xhj9.onrender.com/api/auth/profile",
+        `${baseURL}/api/auth/profile`,
         {
           withCredentials: true,
           headers: {
@@ -53,10 +59,14 @@ export const loginUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://e-commerce-api-xhj9.onrender.com/api/auth/login",
+        `${baseURL}/api/auth/login`,
         userData,
         {
           withCredentials: true,
+          headers: {
+            "Cache-Control":
+                "no-cache no-store, must-revalidate proxy-revalidate",
+          },
         }
       );
       return response.data;
@@ -71,10 +81,14 @@ export const logOutUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://e-commerce-api-xhj9.onrender.com/api/auth/logout",
+        `${baseURL}/api/auth/logout`,
         {},
         {
           withCredentials: true,
+          headers: {
+            "Cache-Control":
+                "no-cache no-store, must-revalidate proxy-revalidate",
+          },
         }
       );
       return response.data;

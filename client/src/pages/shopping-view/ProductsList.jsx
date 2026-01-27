@@ -7,7 +7,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { sortOprions } from "@/config";
+import { sortOptions } from "@/config";
 import { ArrowUpDown } from "lucide-react";
 import { useSelector } from "react-redux";
 import ProductTileShopping from "./Product-Tile";
@@ -18,7 +18,7 @@ import {
   fetchProductDetails,
 } from "@/store/shop/products-slice";
 import { useSearchParams } from "react-router-dom";
-import ProductDetails from "./ProductDetails";
+import ProductDetailsDialog from "@/components/shopping-view/ProductDetails.jsx";
 function ShoppingProductsList() {
   const { products, product } = useSelector((state) => state.shopProducts);
   const dispatch = useDispatch();
@@ -119,7 +119,7 @@ function ShoppingProductsList() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-[200px]">
                 <DropdownMenuRadioGroup value={sort} onValueChange={handleSort}>
-                  {sortOprions.map((sortItem) => (
+                  {sortOptions.map((sortItem) => (
                     <DropdownMenuRadioItem
                       value={sortItem.id}
                       key={sortItem.id}
@@ -143,13 +143,18 @@ function ShoppingProductsList() {
           ))}
         </div>
       </div>
-      <ProductDetails
+      <ProductDetailsDialog
+          open={open}
+          setOpen={setOpen}
+          productDetails={product}
+      />
+      {/*<ProductDetails
         numberOfProduct={numberOfProduct}
         open={open}
         setOpen={setOpen}
         product={product}
         handleNumberOfProduct={handleNumberOfProduct}
-      />
+      />*/}
     </div>
   );
 }

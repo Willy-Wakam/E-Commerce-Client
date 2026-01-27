@@ -1,11 +1,11 @@
+import AdminOrdersView from "@/components/admin-view/Orders.jsx";
 
 
 function AdminOrders() {
   return (
-    <div>
-      <h1>Orders</h1>
-      <p>This is the Orders page.</p>
-    </div>
+      <div>
+          <AdminOrdersView />
+      </div>
   );
 }  
 

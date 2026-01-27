@@ -46,7 +46,7 @@ function ProductTileShopping({ product, handleAddProduct }) {
           </div>
         </CardContent>
         <CardFooter className="mb-2">
-            <Button className="w-full !bg-gray-900 hover:font-semibold" onClick={() => handleAddProduct(product._id)}>Add to cart</Button>
+            <Button className="w-full !bg-gray-900 hover:font-semibold" onClick={() => handleAddProduct(product._id)}>show details</Button>
         </CardFooter>
       </div>
     </Card>

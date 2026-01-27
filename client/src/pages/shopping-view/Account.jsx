@@ -1,12 +1,35 @@
-
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import accImg from "../../assets/account.jpg";
+import Address from "@/components/shopping-view/Address.jsx";
+import ShoppingOrders from "@/components/shopping-view/Orders.jsx";
 
 function ShoppingAccount() {
-  return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-2xl font-bold mb-4">Shopping Account</h1>
-      <p className="text-lg">This is the shopping account page.</p>
-    </div>
-  );
+    return (
+        <div className="flex flex-col">
+            <div className="relative h-[300px] w-full overflow-hidden">
+                <img
+                    src={accImg}
+                    className="h-full w-full object-cover object-center"
+                />
+            </div>
+            <div className="container mx-auto grid grid-cols-1 gap-8 py-8">
+                <div className="flex flex-col rounded-lg border bg-background p-6 shadow-sm">
+                    <Tabs defaultValue="orders">
+                        <TabsList className={"m-2"}>
+                            <TabsTrigger value="orders" className={"!text-white"}>Orders</TabsTrigger>
+                            <TabsTrigger value="address" className={"ml-4 !text-white"}>Address</TabsTrigger>
+                        </TabsList>
+                        <TabsContent value="orders">
+                            <ShoppingOrders />
+                        </TabsContent>
+                        <TabsContent value="address">
+                            <Address />
+                        </TabsContent>
+                    </Tabs>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default ShoppingAccount;

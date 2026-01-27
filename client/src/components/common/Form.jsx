@@ -11,7 +11,7 @@ import {
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
 function CommonForm({
-  FormControls: formControls,
+  FormControls: FormControls,
   formData,
   setFormData,
   onSubmit,
@@ -24,7 +24,7 @@ function CommonForm({
   isEditMode
 }) {
     function isFormValid(){
-    return Object.keys(formData).map(key => formData[key] !== "").every(item => item)
+    return Object.keys(formData).map(key => formData[key] !== "").every(item => item.label !== "Notes")
   }
 
   function renderInputsByComponentType(getControlItem, index) {
@@ -187,7 +187,7 @@ function CommonForm({
   return (
     <form onSubmit={onSubmit}>
       <div className="flex flex-col gap-3">
-        {formControls.map((control, index) => (
+        {FormControls.map((control, index) => (
           <div key={index} className="grid w-full gap-1.5">
             <Label
               htmlFor={control.name}

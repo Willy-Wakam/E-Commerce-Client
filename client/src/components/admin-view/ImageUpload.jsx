@@ -17,12 +17,14 @@ function ImageUpload({
   imageLoadingState,
   isEditMode,
 }) {
+  const baseURL = import.meta.env.DEV? import.meta.env.VITE_API_BASE_URL_DEV : import.meta.env.VITE_API_BASE_URL;
+
   async function uploadFileToCloudinary() {
     const formData = new FormData();
     formData.append("my_file", file);
 
     const response = await axios.post(
-      "https://e-commerce-api-xhj9.onrender.com/api/admin/products/upload-image",
+      `${baseURL}/api/admin/products/upload-image`,
       formData
     );
     console.log("Response from Cloudinary:", response.data);
@@ -85,17 +87,17 @@ function ImageUpload({
         <>
           <div className="flex items-center gap-2">
             <Input
-              name={getControlItem.name}
-              placeholder={getControlItem.placeholder}
-              id={getControlItem.name + index}
+              name={getControlItem?.name}
+              placeholder={getControlItem?.placeholder}
+              id={getControlItem?.name + index}
               type="url"
-              required={getControlItem.required}
-              validation={getControlItem.validation}
+              required={getControlItem?.required}
+              validation={getControlItem?.validation}
               value={value}
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  [getControlItem.name]: e.target.value,
+                  [getControlItem?.name]: e.target.value,
                 })
               }
             />

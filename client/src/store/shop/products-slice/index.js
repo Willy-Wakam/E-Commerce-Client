@@ -7,6 +7,8 @@ const initialState = {
   product: null
 };
 
+const baseURL = import.meta.env.DEV? import.meta.env.VITE_API_BASE_URL_DEV : import.meta.env.VITE_API_BASE_URL;
+
 export const fetchAllFilteredProducts = createAsyncThunk(
   "admin/products/fetchFilteredProducts",
   async ({ filterParams, sortParams }, { rejectWithValue }) => {
@@ -16,7 +18,7 @@ export const fetchAllFilteredProducts = createAsyncThunk(
         sortBy: sortParams,
       });
       const response = await axios.get(
-        `https://e-commerce-api-xhj9.onrender.com/api/shop/products/get?${query}`,
+        `${baseURL}/api/shop/products/get?${query}`,
 
         {
           headers: {
@@ -41,7 +43,7 @@ export const fetchProductDetails = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `https://e-commerce-api-xhj9.onrender.com/api/shop/products/get/${id}`,
+        `${baseURL}/api/shop/products/get/${id}`,
 
         {
           headers: {
@@ -90,5 +92,5 @@ const shoppingProductsSlice = createSlice({
       });
   },
 });
-
+export const { setProductDetails } = shoppingProductsSlice.actions;
 export const shoppingProductsReducer = shoppingProductsSlice.reducer;

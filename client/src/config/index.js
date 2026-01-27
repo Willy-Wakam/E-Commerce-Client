@@ -213,6 +213,22 @@ export const shoppingViewHeaderMenuItems = [
   },
 ];
 
+export const categoryOptionsMap = {
+  men: "Men",
+  women: "Women",
+  kids: "Kids",
+  accessories: "Accessories",
+  footwear: "Footwear",
+};
+
+export const brandOptionsMap = {
+  nike: "Nike",
+  adidas: "Adidas",
+  puma: "Puma",
+  levi: "Levi",
+  zara: "Zara",
+  "h&m": "H&M",
+};
 export const filterOptions = {
   Category: [
     { id: "men", label: "Men" },
@@ -231,9 +247,47 @@ export const filterOptions = {
   ],
 };
 
-export const sortOprions =[
+export const sortOptions =[
     { id: "price-lowToHigh", label: "Price: low to high" },
     { id: "price-highToLow", label: "Price: high to low" },
     { id: "name-aToz", label: "Name: A to Z" },
-    { id: "name-zToa", label: "Name: Z to A" }, 
+    { id: "name-zToa", label: "Name: Z to A" },
 ]
+
+export const addressFormControls = [
+  {
+    label: "Address",
+    name: "address",
+    componentType: "input",
+    type: "text",
+    placeholder: "Enter your address",
+  },
+  {
+    label: "City",
+    name: "city",
+    componentType: "input",
+    type: "text",
+    placeholder: "Enter your city",
+  },
+  {
+    label: "Pincode",
+    name: "pincode",
+    componentType: "input",
+    type: "text",
+    placeholder: "Enter your pincode",
+  },
+  {
+    label: "Phone",
+    name: "phone",
+    componentType: "input",
+    type: "text",
+    placeholder: "Enter your phone number",
+  },
+  {
+    label: "Notes",
+    name: "notes",
+    componentType: "textarea",
+    placeholder: "Enter any additional notes",
+  },
+];
+

@@ -236,8 +236,8 @@ Standard: `http://localhost:5173`
 Die Datei liegt unter `client/.env`:
 
 ```env
-VITE_API_BASE_URL_DEV=http://localhost:4000
-VITE_API_BASE_URL=https://e-commerce-api-xhj9.onrender.com
+VITE_API_BASE_URL_DEV=http://localhost:<port>
+VITE_API_BASE_URL=<https://your-backend-url>
 ```
 
 Im Code wird die URL so gewählt:

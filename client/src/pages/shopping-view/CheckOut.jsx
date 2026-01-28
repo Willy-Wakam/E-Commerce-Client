@@ -15,7 +15,6 @@ function ShoppingCardCheckout() {
     const [isPaymentStart, setIsPaymemntStart] = useState(false);
     const dispatch = useDispatch();
 
-    console.log(currentSelectedAddress, "cartItems");
 
     const totalCartAmount =
         cartItems && cartItems.items && cartItems.items.length > 0
@@ -32,18 +31,12 @@ function ShoppingCardCheckout() {
 
     function handleInitiatePaypalPayment() {
         if (cartItems.length === 0) {
-            toast({
-                title: "Your cart is empty. Please add items to proceed",
-                variant: "destructive",
-            });
+            toast.info( "Your cart is empty. Please add items to proceed");
 
             return;
         }
         if (currentSelectedAddress === null) {
-            toast({
-                title: "Please select one address to proceed.",
-                variant: "destructive",
-            });
+            toast.info( "Please select one address to proceed.");
 
             return;
         }
@@ -53,8 +46,8 @@ function ShoppingCardCheckout() {
             cartId: cartItems?._id,
             cartItems: cartItems.items.map((singleCartItem) => ({
                 productId: singleCartItem?.productId,
-                title: singleCartItem?.name,
-                image: singleCartItem?.imageUrl,
+                name: singleCartItem?.name,
+                imageUrl: singleCartItem?.imageUrl,
                 price:
                     singleCartItem?.salePrice > 0
                         ? singleCartItem?.salePrice
@@ -80,7 +73,6 @@ function ShoppingCardCheckout() {
         };
 
         dispatch(createNewOrder(orderData)).then((data) => {
-            console.log(data, "sangam");
             if (data?.payload?.success) {
                 setIsPaymemntStart(true);
             } else {

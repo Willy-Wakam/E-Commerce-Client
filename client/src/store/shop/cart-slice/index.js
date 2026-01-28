@@ -10,13 +10,15 @@ const baseURL = import.meta.env.DEV? import.meta.env.VITE_API_BASE_URL_DEV : imp
 
 export const addToCart = createAsyncThunk(
     "cart/addToCart",
-    async ({ userId, productId, quantity }) => {
+    async ({ userId, productId, quantity, name, imageUrl }) => {
         const response = await axios.post(
             `${baseURL}/api/shop/cart/add`,
             {
                 userId,
                 productId,
                 quantity,
+                name,
+                imageUrl,
             }
         );
 
@@ -48,13 +50,15 @@ export const deleteCartItem = createAsyncThunk(
 
 export const updateCartQuantity = createAsyncThunk(
     "cart/updateCartQuantity",
-    async ({ userId, productId, quantity }) => {
+    async ({ userId, productId, quantity, name, imageUrl }) => {
         const response = await axios.put(
             `${baseURL}/api/shop/cart/update-cart`,
             {
                 userId,
                 productId,
                 quantity,
+                name,
+                imageUrl,
             }
         );
 

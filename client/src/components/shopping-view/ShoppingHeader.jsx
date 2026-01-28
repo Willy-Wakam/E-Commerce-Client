@@ -35,17 +35,37 @@ function MenuItems() {
 function HeaderRightContent() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.shopCart);
   const navigate = useNavigate();
+  const cartCount =
+      cartItems?.items?.reduce((sum, item) => sum + (item?.quantity ?? 0), 0) ?? 0;
   return (
     <div className="flex lg:items-center lg:flex-row flex-col gap-4  ml-[2rem]">
+      <div className="relative">
       <Button
         variant="outline"
         size="icon"
         onClick={() => navigate("/shop/checkout")}
+        aria-label={`User cart, ${cartCount} items`}
       >
         <ShoppingCart className="h-6 w-6" />
         <span className="sr-only">User cart</span>
       </Button>
+        {cartCount > 0 && (
+          <span
+              className="
+              absolute -top-2 -right-2
+              flex h-5 min-w-5 items-center justify-center
+              rounded-full bg-red-600 px-1
+              text-xs font-bold text-white
+            "
+          >
+            {cartCount > 99 ? "99+" : cartCount}
+          </span>
+      )}
+      </div>
+
+
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar

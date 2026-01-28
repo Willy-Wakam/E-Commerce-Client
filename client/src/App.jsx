@@ -20,7 +20,6 @@ import { checkProfile } from "./store/auth-slice";
 import axios from "axios";
 import AdminUsers from "@/pages/admin-view/Users.jsx";
 
-axios.defaults.baseURL = "https://e-commerce-app-oa1v.onrender.com";
 axios.defaults.withCredentials = true;
 
 function App() {

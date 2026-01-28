@@ -7,7 +7,7 @@ import {toast} from "react-toastify";
 function UserCartItemsContent({ cartItem }) {
     const { user } = useSelector((state) => state.auth);
     const { cartItems } = useSelector((state) => state.shopCart);
-    const { productList } = useSelector((state) => state.shopProducts);
+    const { products } = useSelector((state) => state.shopProducts);
     const dispatch = useDispatch();
 
     function handleUpdateQuantity(getCartItem, typeOfAction) {
@@ -19,10 +19,10 @@ function UserCartItemsContent({ cartItem }) {
                     (item) => item.productId === getCartItem?.productId
                 );
 
-                const getCurrentProductIndex = productList.findIndex(
+                const getCurrentProductIndex = products.findIndex(
                     (product) => product._id === getCartItem?.productId
                 );
-                const getTotalStock = productList[getCurrentProductIndex].totalStock;
+                const getTotalStock = products[getCurrentProductIndex].totalStock;
 
                 console.log(getCurrentProductIndex, getTotalStock, "getTotalStock");
 

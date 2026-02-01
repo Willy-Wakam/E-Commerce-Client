@@ -45,15 +45,15 @@ function AdminProducts() {
       setUploadedImageUrl("");
     }
     dispatch(fetchAllproducts());
-  }, [currentEditedId, dispatch, open, uploadedImageUrl]);
+  }, [currentEditedId, dispatch, open, uploadedImageUrl, products]);
 
   function handleOnSubmit(e) {
     e.preventDefault();
     const newFormData = {
       ...formData,
-      price: Number(formData.price),
-      salePrice: Number(formData.salePrice),
-      stock: Number(formData.stock),
+      price: Number(formData?.price),
+      salePrice: Number(formData?.salePrice),
+      stock: Number(formData?.stock),
     };
     if (currentEditedId)
       dispatch(

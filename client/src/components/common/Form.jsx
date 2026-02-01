@@ -194,7 +194,7 @@ function CommonForm({
               className={
                 isEditMode && control.name === "imageUrl"
                   ? "hidden"
-                  : `mb-1 font-semibold`
+                  : "mb-1 font-semibold"
               }
             >
               {control.label}
@@ -203,7 +203,7 @@ function CommonForm({
           </div>
         ))}
       </div>
-      <Button type="submit" className="m-2 w-full !bg-primary text-white " disabled={!isFormValid()}>
+      <Button type="submit" className="m-2 w-full" disabled={!isFormValid()}>
         {buttonText || "Submit"}
       </Button>
     </form>

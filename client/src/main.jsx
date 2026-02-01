@@ -6,13 +6,16 @@ import { Provider } from 'react-redux'
 import store from './store/store'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {ThemeProvider} from "@/components/theme/ThemeProvider.jsx";
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <Provider store={store}>
-      <App />
-      <ToastContainer position='top-center' />
-    </Provider>
+      <Provider store={store}>
+          <ThemeProvider defaultTheme="system">
+              <App />
+              <ToastContainer position="top-center" />
+          </ThemeProvider>
+      </Provider>
   </BrowserRouter>
    
 )

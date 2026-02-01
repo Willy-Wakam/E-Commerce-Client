@@ -26,7 +26,6 @@ function ShoppingProductsList() {
   const [sort, setSort] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [open, setOpen] = useState(false);
-  const [numberOfProduct, setNumberOfProduct] = useState(1);
 
   function createSearchParamsHelper(filterParams) {
     const queryParams = [];
@@ -41,11 +40,6 @@ function ShoppingProductsList() {
 
   function handleSort(value) {
     setSort(value);
-  }
-
-  function handleNumberOfProduct(button) {
-    if (button === "Minus") setNumberOfProduct(numberOfProduct - 1);
-    else setNumberOfProduct(numberOfProduct + 1);
   }
 
   function handleAddProduct(id) {
@@ -80,6 +74,16 @@ function ShoppingProductsList() {
     if (sort === null) setSort("price-lowToHigh");
     setFilter(JSON.parse(sessionStorage.getItem("filters")) || {});
   }, [sort]);
+
+  useEffect(() => {
+    const category = searchParams.get("category");
+    if (category) {
+      setFilter((prev) => ({
+        ...prev,
+        category: [category], // set/overwrite category filter
+      }));
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     if (filter !== null && sort !== null)

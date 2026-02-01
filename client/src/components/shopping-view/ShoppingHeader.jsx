@@ -1,5 +1,5 @@
 import { House, LogOut, Menu, ShoppingCart, UserCog } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import {createSearchParams, Link, useNavigate} from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Button } from "../ui/button";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,15 +15,33 @@ import {
 } from "../ui/dropdown-menu";
 import { logOutUser } from "@/store/auth-slice";
 import { toast } from "react-toastify";
+import ThemeToggle from "@/components/theme/ThemeToggle.jsx";
 
 function MenuItems() {
+  const navigate = useNavigate();
+
+  const handleMenuClick = (menuItem, e) => {
+    e.preventDefault();
+    if (!menuItem.filter) {
+      navigate(menuItem.path);
+      return;
+    }
+
+    const { group, id } = menuItem.filter;
+
+    navigate({
+      pathname: "/shop/products",
+      search: createSearchParams({ [group]: id }).toString(),
+    });
+  };
   return (
     <nav className="flex lg:mt-0 lg:ml-0 mt-[3rem] ml-[2rem] flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
       {shoppingViewHeaderMenuItems.map((menuItem) => (
         <Link
-          className="text-sm font-medium !text-black"
+          className="text-sm font-medium text-foreground"
           key={menuItem.id}
           to={menuItem.path}
+          onClick={(e) => handleMenuClick(menuItem, e)}
         >
           {menuItem.label}
         </Link>
@@ -40,38 +58,29 @@ function HeaderRightContent() {
   const cartCount =
       cartItems?.items?.reduce((sum, item) => sum + (item?.quantity ?? 0), 0) ?? 0;
   return (
-    <div className="flex lg:items-center lg:flex-row flex-col gap-4  ml-[2rem]">
-      <div className="relative">
-      <Button
-        variant="outline"
-        size="icon"
-        onClick={() => navigate("/shop/checkout")}
-        aria-label={`User cart, ${cartCount} items`}
-      >
-        <ShoppingCart className="h-6 w-6" />
-        <span className="sr-only">User cart</span>
-      </Button>
+      <div className="flex items-center gap-4 ml-8 lg:ml-0">
+        <div className="relative inline-flex w-fit">
+        <Button
+            variant="outline"
+            size="icon"
+            onClick={() => navigate("/shop/checkout")}
+        >
+          <ShoppingCart className="h-6 w-6" />
+          <span className="sr-only">User cart</span>
+        </Button>
+
         {cartCount > 0 && (
-          <span
-              className="
-              absolute -top-2 -right-2
-              flex h-5 min-w-5 items-center justify-center
-              rounded-full bg-red-600 px-1
-              text-xs font-bold text-white
-            "
-          >
-            {cartCount > 99 ? "99+" : cartCount}
-          </span>
-      )}
+            <span className="absolute -top-2 -right-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-600 px-1 text-xs font-bold text-white">
+      {cartCount > 99 ? "99+" : cartCount}
+    </span>
+        )}
       </div>
-
-
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar
-            className="!bg-gray-900 justify-center items-center hover:cursor-pointer" /* onClick={() => navigate("/shop/account")} */
+            className="bg-background justify-center items-center hover:cursor-pointer" /* onClick={() => navigate("/shop/account")} */
           >
-            <AvatarFallback className="!bg-gray-900 text-white font-extrabold">
+            <AvatarFallback className="bg-background text-foreground font-extrabold">
               {user?.username[0]?.toUpperCase()}
             </AvatarFallback>
           </Avatar>
@@ -101,6 +110,7 @@ function HeaderRightContent() {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      <ThemeToggle />
     </div>
   );
 }
@@ -109,8 +119,8 @@ function ShoppingHeader() {
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
         <Link className="flex items-center gap-2" to="/shop/home">
-          <House className="h-6 w-6" color="black" />
-          <span className="font-bold text-black">Home</span>
+          <House className="h-6 w-6" />
+          <span className="font-bold text-muted-foreground">Home</span>
         </Link>
         <Sheet>
           <SheetTrigger asChild>
